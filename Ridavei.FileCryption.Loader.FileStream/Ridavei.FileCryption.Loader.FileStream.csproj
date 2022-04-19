@@ -1,15 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	  <TargetFrameworks>net35;net452;net472;net48;net5.0;net6.0</TargetFrameworks>
+	  <TargetFrameworks>net35;net452;net472;net48;netcoreapp3.1;net5.0;net6.0</TargetFrameworks>
 	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	  <PackageTags>encryption;decryption;builder;FileStream</PackageTags>
 	  <Title>Ridavei.FileCryption.Loader.FileStream</Title>
 	  <AssemblyVersion>1.0</AssemblyVersion>
 	  <Authors>Mateusz Fiedorowicz</Authors>
-	  <Description>Builder extension for loading file through FileStream for File decryption/encryption.</Description>
+	  <Description>Builder extension for loading file through FileStream for file decryption/encryption.</Description>
 	  <PackageProjectUrl>https://github.com/MatFied/Ridavei.FileCryption</PackageProjectUrl>
 	  <PackageLicenseUrl>https://github.com/MatFied/Ridavei.FileCryption/blob/main/LICENSE</PackageLicenseUrl>
+	  <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
