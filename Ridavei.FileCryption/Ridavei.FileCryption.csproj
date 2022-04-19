@@ -1,24 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net35;net452;net472;net48;net5.0;net6.0</TargetFrameworks>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <RepositoryUrl></RepositoryUrl>
-    <PackageTags>encryption;decryption;builder</PackageTags>
-	<Title>Ridavei.FileCryption</Title>
-    <AssemblyVersion>1.0</AssemblyVersion>
-    <Authors>Mateusz Fiedorowicz</Authors>
-    <Description>Builder for File decryption/encryption.</Description>
-    <PackageProjectUrl>https://github.com/MatFied/Ridavei.FileCryption</PackageProjectUrl>
-	<PackageLicenseUrl>https://github.com/MatFied/Ridavei.FileCryption/blob/main/LICENSE</PackageLicenseUrl>
+	  <TargetFrameworks>net35;net452;net472;net48;net5.0;net6.0</TargetFrameworks>
+	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	  <PackageTags>encryption;decryption;builder</PackageTags>
+	  <Title>Ridavei.FileCryption</Title>
+	  <AssemblyVersion>1.0</AssemblyVersion>
+	  <Authors>Mateusz Fiedorowicz</Authors>
+	  <Description>Builder for File decryption/encryption.</Description>
+	  <PackageProjectUrl>https://github.com/MatFied/Ridavei.FileCryption</PackageProjectUrl>
+	  <PackageLicenseUrl>https://github.com/MatFied/Ridavei.FileCryption/blob/main/LICENSE</PackageLicenseUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0|AnyCPU'">
-    <WarningLevel>5</WarningLevel>
+	  <WarningLevel>5</WarningLevel>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0|AnyCPU'">
-    <WarningLevel>5</WarningLevel>
+	  <WarningLevel>5</WarningLevel>
   </PropertyGroup>
 
 </Project>
