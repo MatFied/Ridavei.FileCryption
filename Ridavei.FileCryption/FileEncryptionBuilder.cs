@@ -21,6 +21,16 @@ namespace Ridavei.FileCryption
         }
 
         /// <summary>
+        /// Set the method used for encryption.
+        /// </summary>
+        /// <param name="func"></param>
+        /// <returns>Builder</returns>
+        public AFileCryptionBuilderBase SetEncryptionMethod(Func<Stream, ContentType, string, Stream> func)
+        {
+            return this.SetCryptionMethod(func);
+        }
+
+        /// <summary>
         /// File encryption method that returns <see cref="Stream"/>.
         /// </summary>
         /// <param name="fileInfoForLoaderMethod"><see cref="Object"/> that contains basic information used by the loader method.</param>

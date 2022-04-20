@@ -40,7 +40,7 @@ namespace Ridavei.FileCryption
         /// </summary>
         /// <param name="func"></param>
         /// <returns>Builder</returns>
-        public AFileCryptionBuilderBase SetEncryptionMethod(Func<Stream, ContentType, string, Stream> func)
+        protected AFileCryptionBuilderBase SetCryptionMethod(Func<Stream, ContentType, string, Stream> func)
         {
             CryptionMethod = func;
             return this;
