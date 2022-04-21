@@ -8,10 +8,12 @@
 		<Authors>Mateusz Fiedorowicz</Authors>
 		<Copyright>Mateusz Fiedorowicz</Copyright>
 		<Description>Builder for file decryption/encryption.</Description>
-		<PackageProjectUrl>https://github.com/MatFied/Ridavei.FileCryption</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/MatFied/Ridavei.FileCryption.Loader.FileStream</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<FileVersion>1.0.0.1</FileVersion>
+		<FileVersion>1.0.1</FileVersion>
+		<Version>1.0.1</Version>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0|AnyCPU'">
