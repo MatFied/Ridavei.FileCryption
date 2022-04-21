@@ -158,3 +158,4 @@ namespace TestProgram
     }
 }
 ```
+You can use many other encryption/decryption methods because they are added into a Dictionary. If you add a encryption/decryption method for a ContentType that already exists in the Dictionary it will overwrite the last one.
