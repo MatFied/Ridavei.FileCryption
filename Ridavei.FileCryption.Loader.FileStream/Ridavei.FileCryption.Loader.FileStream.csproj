@@ -10,7 +10,6 @@
 	  <Description>Builder extension for loading file through FileStream for file decryption/encryption.</Description>
 	  <PackageProjectUrl>https://github.com/MatFied/Ridavei.FileCryption</PackageProjectUrl>
 	  <PackageLicenseUrl>https://github.com/MatFied/Ridavei.FileCryption/blob/main/LICENSE</PackageLicenseUrl>
-	  <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

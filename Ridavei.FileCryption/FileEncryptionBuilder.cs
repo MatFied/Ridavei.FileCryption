@@ -23,11 +23,12 @@ namespace Ridavei.FileCryption
         /// <summary>
         /// Set the method used for encryption.
         /// </summary>
+        /// <param name="contentType">Represents the MIME Content-Type header.</param>
         /// <param name="func"></param>
         /// <returns>Builder</returns>
-        public AFileCryptionBuilderBase SetEncryptionMethod(Func<Stream, ContentType, string, Stream> func)
+        public AFileCryptionBuilderBase AddEncryptionMethod(ContentType contentType, Func<Stream, string, Stream> func)
         {
-            return this.SetCryptionMethod(func);
+            return this.AddCryptionMethod(contentType, func);
         }
 
         /// <summary>
@@ -37,8 +38,10 @@ namespace Ridavei.FileCryption
         /// <param name="contentType">Represents the MIME Content-Type header.</param>
         /// <param name="password">Password used for encryption.</param>
         /// <returns><see cref="Stream"/> of encrypted file.</returns>
-        /// <exception cref="ArgumentNullException">Exception throwed when none of the methods are set or file info are null.</exception>
+        /// <exception cref="ArgumentNullException">Exception throwed when file load method or file info or content type are null.</exception>
+        /// <exception cref="ArgumentException">Exception throwed when no cryption method exists.</exception>
         /// <exception cref="FileNotFoundException">Exception throwed when the file was not found.</exception>
+        /// <exception cref="NotSupportedException">Exception throwed when the content type is not supported.</exception>
         public virtual Stream Encrypt(object fileInfoForLoaderMethod, ContentType contentType, string password)
         {
             return Cryption(fileInfoForLoaderMethod, contentType, password);

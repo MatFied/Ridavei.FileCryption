@@ -2,6 +2,8 @@
 using System.IO;
 using System.Net.Mime;
 
+using Ridavei.FileCryption.Tests.Extensions;
+
 using NUnit.Framework;
 
 namespace Ridavei.FileCryption.Tests
@@ -10,9 +12,21 @@ namespace Ridavei.FileCryption.Tests
     public abstract class AFileCryptionBuilderTestsBase
     {
         protected Func<object, ContentType, string, Stream> CryptionMethod;
-        protected Func<Func<Stream, ContentType, string, Stream>, AFileCryptionBuilderBase> SetCryptionMethod;
+        protected Func<ContentType, Func<Stream, string, Stream>, AFileCryptionBuilderBase> AddCryptionMethod;
+        protected Func<AFileCryptionBuilderBase> ExtensionCryptionMethod;
         protected AFileCryptionBuilderBase Builder;
-        
+        protected string TestFilePath;
+        protected string ExpectedExtensionCryptionFileValue;
+
+        [Test]
+        public void SetFileLoaderMethod_NullMethod__NoException()
+        {
+            Assert.DoesNotThrow(() =>
+            {
+                Builder.SetFileLoaderMethod(null);
+            });
+        }
+
         [Test]
         public void Cryption_NoFileLoadMethodSet__RaisesException()
         {
@@ -23,9 +37,9 @@ namespace Ridavei.FileCryption.Tests
         }
 
         [Test]
-        public void Cryption_NoCryptionMethodSet__RaisesException()
+        public void Cryption_NoCryptionMethodAdded__RaisesException()
         {
-            Assert.Throws<ArgumentNullException>(() =>
+            Assert.Throws<ArgumentException>(() =>
             {
                 Builder.SetFileLoaderMethod(TestFileLoadMethod);
                 CryptionMethod(string.Empty, null, string.Empty);
@@ -38,8 +52,19 @@ namespace Ridavei.FileCryption.Tests
             Assert.Throws<ArgumentNullException>(() =>
             {
                 Builder.SetFileLoaderMethod(TestNullFileLoadMethod);
-                SetCryptionMethod(TestCryptionMethod);
+                AddCryptionMethod(new ContentType(MediaTypeNames.Text.Plain), TestCryptionMethod);
                 CryptionMethod(null, null, string.Empty);
+            });
+        }
+
+        [Test]
+        public void Cryption_NullContentType__RaisesException()
+        {
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                Builder.SetFileLoaderMethod(TestNullFileLoadMethod);
+                AddCryptionMethod(new ContentType(MediaTypeNames.Text.Plain), TestCryptionMethod);
+                CryptionMethod("test", null, string.Empty);
             });
         }
 
@@ -48,9 +73,21 @@ namespace Ridavei.FileCryption.Tests
         {
             Assert.Throws<FileNotFoundException>(() =>
             {
+                ContentType ct = new ContentType(MediaTypeNames.Text.Plain);
                 Builder.SetFileLoaderMethod(TestNullFileLoadMethod);
-                SetCryptionMethod(TestCryptionMethod);
-                CryptionMethod("test", null, string.Empty);
+                AddCryptionMethod(ct, TestCryptionMethod);
+                CryptionMethod("test", ct, string.Empty);
+            });
+        }
+
+        [Test]
+        public void Cryption_NotSupportedContentType__RaisesException()
+        {
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                Builder.SetFileLoaderMethod(TestFileLoadMethod);
+                AddCryptionMethod(new ContentType(MediaTypeNames.Text.Plain), TestCryptionMethod);
+                CryptionMethod("test", new ContentType(MediaTypeNames.Text.Html), string.Empty);
             });
         }
 
@@ -59,11 +96,27 @@ namespace Ridavei.FileCryption.Tests
         {
             Assert.DoesNotThrow(() =>
             {
+                ContentType ct = new ContentType(MediaTypeNames.Text.Plain);
                 Builder.SetFileLoaderMethod(TestFileLoadMethod);
-                SetCryptionMethod(TestCryptionMethod);
-                using (Stream stream = CryptionMethod("test", null, string.Empty))
+                AddCryptionMethod(ct, TestCryptionMethod);
+                using (Stream stream = CryptionMethod("test", ct, string.Empty))
                 {
                     Assert.IsNotNull(stream);
+                }
+            });
+        }
+
+        [Test]
+        public void Cryption_UseExtensions__ReturnsStream()
+        {
+            Assert.DoesNotThrow(() =>
+            {
+                Builder.UseFileLoaderExt();
+                ExtensionCryptionMethod();
+                using (Stream stream = CryptionMethod(TestFilePath, new ContentType(MediaTypeNames.Text.Plain), "pass"))
+                {
+                    Assert.IsNotNull(stream);
+                    Assert.AreEqual(ExpectedExtensionCryptionFileValue, TestHelper.ReadTextFromFile(stream));
                 }
             });
         }
@@ -78,7 +131,7 @@ namespace Ridavei.FileCryption.Tests
             return null;
         }
 
-        private static Stream TestCryptionMethod(Stream file, ContentType contentType, string password)
+        private static Stream TestCryptionMethod(Stream file, string password)
         {
             return new MemoryStream();
         }

@@ -14,4 +14,13 @@
     <ProjectReference Include="..\Ridavei.FileCryption\Ridavei.FileCryption.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="DecryptFile.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="EncryptFile.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

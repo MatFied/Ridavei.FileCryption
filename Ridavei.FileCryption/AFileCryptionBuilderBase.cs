@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net.Mime;
 
@@ -12,12 +13,12 @@ namespace Ridavei.FileCryption
         /// <summary>
         /// Method used for loading file.
         /// </summary>
-        protected Func<object, Stream> FileLoadMethod;
+        private Func<object, Stream> _fileLoadMethod;
 
         /// <summary>
-        /// Method used for encryption/decryption.
+        /// Dictionary of encryption/decryption methods for desired content types.
         /// </summary>
-        protected Func<Stream, ContentType, string, Stream> CryptionMethod;
+        private readonly Dictionary<ContentType, Func<Stream, string, Stream>> _cryptionMethods = new Dictionary<ContentType, Func<Stream, string, Stream>>();
 
         /// <summary>
         /// Hided constructor for <see cref="AFileCryptionBuilderBase"/>.
@@ -31,18 +32,23 @@ namespace Ridavei.FileCryption
         /// <returns>Builder</returns>
         public AFileCryptionBuilderBase SetFileLoaderMethod(Func<object, Stream> func)
         {
-            FileLoadMethod = func;
+            _fileLoadMethod = func;
             return this;
         }
 
         /// <summary>
-        /// Set the method used for encryption/decryption.
+        /// Add method used for encryption/decryption.
         /// </summary>
+        /// <param name="contentType">Represents the MIME Content-Type header.</param>
         /// <param name="func"></param>
         /// <returns>Builder</returns>
-        protected AFileCryptionBuilderBase SetCryptionMethod(Func<Stream, ContentType, string, Stream> func)
+        protected AFileCryptionBuilderBase AddCryptionMethod(ContentType contentType, Func<Stream, string, Stream> func)
         {
-            CryptionMethod = func;
+            if (_cryptionMethods.ContainsKey(contentType))
+                _cryptionMethods[contentType] = func;
+            else
+                _cryptionMethods.Add(contentType, func);
+
             return this;
         }
 
@@ -53,23 +59,29 @@ namespace Ridavei.FileCryption
         /// <param name="contentType">Represents the MIME Content-Type header.</param>
         /// <param name="password">Password used for encryption/decryption.</param>
         /// <returns><see cref="Stream"/> of encrypted/decrypted file.</returns>
-        /// <exception cref="ArgumentNullException">Exception throwed when none of the methods are set or file info are null.</exception>
+        /// <exception cref="ArgumentNullException">Exception throwed when file load method or file info or content type are null.</exception>
+        /// <exception cref="ArgumentException">Exception throwed when no cryption method exists.</exception>
         /// <exception cref="FileNotFoundException">Exception throwed when the file was not found.</exception>
+        /// <exception cref="NotSupportedException">Exception throwed when the content type is not supported.</exception>
         protected virtual Stream Cryption(object fileInfoForLoaderMethod, ContentType contentType, string password)
         {
-            if (FileLoadMethod == null)
-                throw new ArgumentNullException(nameof(FileLoadMethod));
-            if (CryptionMethod == null)
-                throw new ArgumentNullException(nameof(CryptionMethod));
+            if (_fileLoadMethod == null)
+                throw new ArgumentNullException(nameof(_fileLoadMethod), "File loader method is null.");
+            if (_cryptionMethods.Count == 0)
+                throw new ArgumentException("No cryption methods exists.", nameof(_cryptionMethods));
             if (fileInfoForLoaderMethod == null)
-                throw new ArgumentNullException(nameof(fileInfoForLoaderMethod));
+                throw new ArgumentNullException(nameof(fileInfoForLoaderMethod), "File info used for file loader method is null.");
+            if (contentType == null)
+                throw new ArgumentNullException(nameof(contentType), "Content type is null.");
 
-            using (Stream file = FileLoadMethod(fileInfoForLoaderMethod))
+            using (Stream file = _fileLoadMethod(fileInfoForLoaderMethod))
             {
                 if (file == null)
                     throw new FileNotFoundException("File doesn't exists");
 
-                return CryptionMethod(file, contentType, password);
+                if (!_cryptionMethods.TryGetValue(contentType, out Func<Stream, string, Stream> cryptionMethod))
+                    throw new NotSupportedException($"Content type \"{contentType}\" is not supported.");
+                return cryptionMethod(file, password);
             }
         }
     }

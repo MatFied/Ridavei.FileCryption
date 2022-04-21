@@ -1,4 +1,9 @@
-﻿using NUnit.Framework;
+﻿using System.IO;
+using System.Reflection;
+
+using Ridavei.FileCryption.Tests.Extensions;
+
+using NUnit.Framework;
 
 namespace Ridavei.FileCryption.Tests
 {
@@ -10,7 +15,10 @@ namespace Ridavei.FileCryption.Tests
         {
             Builder = FileEncryptionBuilder.CreateBuilder();
             CryptionMethod = ((FileEncryptionBuilder)Builder).Encrypt;
-            SetCryptionMethod = ((FileEncryptionBuilder)Builder).SetEncryptionMethod;
+            AddCryptionMethod = ((FileEncryptionBuilder)Builder).AddEncryptionMethod;
+            ExtensionCryptionMethod = ((FileEncryptionBuilder)Builder).UseEncryptTxtExt;
+            TestFilePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "EncryptFile.txt");
+            ExpectedExtensionCryptionFileValue = "eTsets tp hprharsaese";
         }
     }
 }
