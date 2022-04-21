@@ -145,11 +145,11 @@ namespace TestProgram
             /*
               Setting the variables above
             */
-            using (Stream decryptedFile = FileDecryptionBuilder
+            using (Stream decryptedFile = FileEncryptionBuilder
                 .CreateBuilder()
                 .UseFileLoaderExt()
                 .UseEncryptTxtExt()
-                .Decrypt(fileInfo, contentType, password))
+                .Encrypt(fileInfo, contentType, password))
             {
                 //Saving the file
             }
