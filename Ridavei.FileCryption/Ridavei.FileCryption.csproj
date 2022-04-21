@@ -6,6 +6,7 @@
 		<Title>Ridavei.FileCryption</Title>
 		<AssemblyVersion>1.0</AssemblyVersion>
 		<Authors>Mateusz Fiedorowicz</Authors>
+		<Copyright>Mateusz Fiedorowicz</Copyright>
 		<Description>Builder for file decryption/encryption.</Description>
 		<PackageProjectUrl>https://github.com/MatFied/Ridavei.FileCryption</PackageProjectUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
