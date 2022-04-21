@@ -92,6 +92,7 @@ namespace TestProgram
 ### Creating extensions
 ```csharp
 using System.IO;
+using System.Net.Mime;
 
 using Ridavei.FileCryption;
 
