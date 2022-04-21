@@ -51,4 +51,6 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: Artifact
+    - name: Publish to NuGet
+      run: nuget push **\*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_SECRET}}
     
