@@ -10,6 +10,7 @@
 		<Description>Builder for file decryption/encryption.</Description>
 		<PackageProjectUrl>https://github.com/MatFied/Ridavei.FileCryption</PackageProjectUrl>
 		<PackageLicenseUrl>https://github.com/MatFied/Ridavei.FileCryption/blob/main/LICENSE</PackageLicenseUrl>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0|AnyCPU'">
