@@ -8,7 +8,7 @@ namespace Ridavei.FileCryption
     /// <summary>
     /// Base class used for file encryption/decryption builders.
     /// </summary>
-    public abstract class AFileCryptionBuilderBase
+    public abstract class AFileCryptionBuilderBase<T> where T: AFileCryptionBuilderBase<T>
     {
         /// <summary>
         /// Method used for loading file.
@@ -21,7 +21,12 @@ namespace Ridavei.FileCryption
         private readonly Dictionary<ContentType, Func<Stream, string, Stream>> _cryptionMethods = new Dictionary<ContentType, Func<Stream, string, Stream>>();
 
         /// <summary>
-        /// Hided constructor for <see cref="AFileCryptionBuilderBase"/>.
+        /// Instance of the builder.
+        /// </summary>
+        protected abstract T BuilderInstance { get; }
+
+        /// <summary>
+        /// Hided constructor for <see cref="AFileCryptionBuilderBase{T}"/>.
         /// </summary>
         protected AFileCryptionBuilderBase() { }
 
@@ -30,10 +35,10 @@ namespace Ridavei.FileCryption
         /// </summary>
         /// <param name="func"></param>
         /// <returns>Builder</returns>
-        public AFileCryptionBuilderBase SetFileLoaderMethod(Func<object, Stream> func)
+        public T SetFileLoaderMethod(Func<object, Stream> func)
         {
             _fileLoadMethod = func;
-            return this;
+            return (T)this;
         }
 
         /// <summary>
@@ -42,7 +47,7 @@ namespace Ridavei.FileCryption
         /// <param name="contentType">Represents the MIME Content-Type header.</param>
         /// <param name="func"></param>
         /// <returns>Builder</returns>
-        protected AFileCryptionBuilderBase AddCryptionMethod(ContentType contentType, Func<Stream, string, Stream> func)
+        protected AFileCryptionBuilderBase<T> AddCryptionMethod(ContentType contentType, Func<Stream, string, Stream> func)
         {
             if (_cryptionMethods.ContainsKey(contentType))
                 _cryptionMethods[contentType] = func;
