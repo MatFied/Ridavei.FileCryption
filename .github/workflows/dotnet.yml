@@ -30,6 +30,15 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
+      
+    - name: Pack library
+      run: dotnet pack --no-build --configuration Release --output out
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: Artifact
+        path: ${{ github.workspace }}/out
+        if-no-files-found: error
   publish:
     name: Publish
     needs: build-and-test
@@ -37,4 +46,7 @@ jobs:
     runs-on: windows-latest
     steps:
     - name: Download artifact
-      run: exit
+      uses: actions/download-artifact@v2
+      with:
+        name: Artifact
+    
