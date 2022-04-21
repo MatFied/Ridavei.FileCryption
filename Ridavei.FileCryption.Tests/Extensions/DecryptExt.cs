@@ -7,7 +7,7 @@ namespace Ridavei.FileCryption.Tests.Extensions
 {
     internal static class DecryptExt
     {
-        public static AFileCryptionBuilderBase UseDecryptTxtExt(this FileDecryptionBuilder builder)
+        public static FileDecryptionBuilder UseDecryptTxtExt(this FileDecryptionBuilder builder)
         {
             return builder.AddDecryptionMethod(new ContentType(MediaTypeNames.Text.Plain), DecryptTxt);
         }

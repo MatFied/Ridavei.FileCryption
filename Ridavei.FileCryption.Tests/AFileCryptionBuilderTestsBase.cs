@@ -9,12 +9,12 @@ using NUnit.Framework;
 namespace Ridavei.FileCryption.Tests
 {
     [TestFixture]
-    public abstract class AFileCryptionBuilderTestsBase
+    public abstract class AFileCryptionBuilderTestsBase<T> where T : AFileCryptionBuilderBase<T>
     {
         protected Func<object, ContentType, string, Stream> CryptionMethod;
-        protected Func<ContentType, Func<Stream, string, Stream>, AFileCryptionBuilderBase> AddCryptionMethod;
-        protected Func<AFileCryptionBuilderBase> ExtensionCryptionMethod;
-        protected AFileCryptionBuilderBase Builder;
+        protected Func<ContentType, Func<Stream, string, Stream>, AFileCryptionBuilderBase<T>> AddCryptionMethod;
+        protected Func<AFileCryptionBuilderBase<T>> ExtensionCryptionMethod;
+        protected AFileCryptionBuilderBase<T> Builder;
         protected string TestFilePath;
         protected string ExpectedExtensionCryptionFileValue;
 

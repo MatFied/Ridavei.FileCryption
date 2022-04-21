@@ -7,7 +7,7 @@ namespace Ridavei.FileCryption
     /// <summary>
     /// Builder class used for file encryption.
     /// </summary>
-    public class FileEncryptionBuilder : AFileCryptionBuilderBase, IFileEncryptionBuilder
+    public class FileEncryptionBuilder : AFileCryptionBuilderBase<FileEncryptionBuilder>, IFileEncryptionBuilder
     {
         private FileEncryptionBuilder() { }
 
@@ -21,14 +21,20 @@ namespace Ridavei.FileCryption
         }
 
         /// <summary>
+        /// Instance of the builder.
+        /// </summary>
+        protected override FileEncryptionBuilder BuilderInstance => this;
+
+        /// <summary>
         /// Set the method used for encryption.
         /// </summary>
         /// <param name="contentType">Represents the MIME Content-Type header.</param>
         /// <param name="func"></param>
         /// <returns>Builder</returns>
-        public AFileCryptionBuilderBase AddEncryptionMethod(ContentType contentType, Func<Stream, string, Stream> func)
+        public FileEncryptionBuilder AddEncryptionMethod(ContentType contentType, Func<Stream, string, Stream> func)
         {
-            return this.AddCryptionMethod(contentType, func);
+            AddCryptionMethod(contentType, func);
+            return this;
         }
 
         /// <summary>

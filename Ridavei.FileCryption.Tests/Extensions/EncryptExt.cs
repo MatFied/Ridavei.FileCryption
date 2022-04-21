@@ -5,7 +5,7 @@ namespace Ridavei.FileCryption.Tests.Extensions
 {
     internal static class EncryptExt
     {
-        public static AFileCryptionBuilderBase UseEncryptTxtExt(this FileEncryptionBuilder builder)
+        public static FileEncryptionBuilder UseEncryptTxtExt(this FileEncryptionBuilder builder)
         {
             return builder.AddEncryptionMethod(new ContentType(MediaTypeNames.Text.Plain), EncryptTxt);
         }

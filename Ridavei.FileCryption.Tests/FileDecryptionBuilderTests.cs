@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace Ridavei.FileCryption.Tests
 {
     [TestFixture]
-    public class FileDecryptionBuilderTests : AFileCryptionBuilderTestsBase
+    public class FileDecryptionBuilderTests : AFileCryptionBuilderTestsBase<FileDecryptionBuilder>
     {
         [SetUp]
         public void SetUp()
