@@ -28,7 +28,10 @@ namespace Ridavei.FileCryption.Tests.Extensions
             for (int i = 0; i < stringToEncrypt.Length; i++)
             {
                 if (i + 1 < stringToEncrypt.Length)
+                {
                     res += stringToEncrypt[i + 1].ToString() + stringToEncrypt[i].ToString();
+                    i++;
+                }
                 else
                     res += stringToEncrypt[i].ToString();
             }

@@ -18,7 +18,7 @@ namespace Ridavei.FileCryption.Tests
             AddCryptionMethod = ((FileEncryptionBuilder)Builder).AddEncryptionMethod;
             ExtensionCryptionMethod = ((FileEncryptionBuilder)Builder).UseEncryptTxtExt;
             TestFilePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "EncryptFile.txt");
-            ExpectedExtensionCryptionFileValue = "eTsets tp hprharsaese";
+            ExpectedExtensionCryptionFileValue = "eTtsp rhsae";
         }
     }
 }

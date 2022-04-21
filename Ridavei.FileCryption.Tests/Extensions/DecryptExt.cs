@@ -23,25 +23,20 @@ namespace Ridavei.FileCryption.Tests.Extensions
             ms.Position = 0;
             return ms;
         }
-
-        private static string DecryptString(string stringToDecrypt, string key)
+        private static string DecryptString(string stringToEncrypt, string key)
         {
-            System.Security.Cryptography.CspParameters cspp = new System.Security.Cryptography.CspParameters
+            string res = string.Empty;
+            for (int i = 0; i < stringToEncrypt.Length; i++)
             {
-                KeyContainerName = key
-            };
-
-            System.Security.Cryptography.RSACryptoServiceProvider rsa = new System.Security.Cryptography.RSACryptoServiceProvider(cspp)
-            {
-                PersistKeyInCsp = true
-            };
-
-            string[] decryptArray = stringToDecrypt.Split(new string[] { "-" }, StringSplitOptions.None);
-            byte[] decryptByteArray = Array.ConvertAll<string, byte>(decryptArray, (s => Convert.ToByte(byte.Parse(s, System.Globalization.NumberStyles.HexNumber))));
-
-            byte[] bytes = rsa.Decrypt(decryptByteArray, true);
-
-            return UTF8Encoding.UTF8.GetString(bytes);
+                if (i + 1 < stringToEncrypt.Length)
+                {
+                    res += stringToEncrypt[i + 1].ToString() + stringToEncrypt[i].ToString();
+                    i++;
+                }
+                else
+                    res += stringToEncrypt[i].ToString();
+            }
+            return res;
         }
     }
 }
