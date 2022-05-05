@@ -12,8 +12,10 @@
 		<RepositoryType>git</RepositoryType>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<FileVersion>1.0.1.1</FileVersion>
-		<Version>1.0.1.1</Version>
+		<FileVersion>1.0.2</FileVersion>
+		<Version>1.0.2</Version>
+		<SignAssembly>True</SignAssembly>
+		<AssemblyOriginatorKeyFile>Ridavei.snk</AssemblyOriginatorKeyFile>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0|AnyCPU'">
