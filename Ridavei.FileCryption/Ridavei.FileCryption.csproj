@@ -8,16 +8,25 @@
 		<Authors>Mateusz Fiedorowicz</Authors>
 		<Copyright>Mateusz Fiedorowicz</Copyright>
 		<Description>Builder for file decryption/encryption.</Description>
-		<RepositoryUrl>https://github.com/MatFied/Ridavei.FileCryption</RepositoryUrl>
+		<RepositoryUrl>https://github.com/MatFied/Ridavei.FileCryption.git</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<FileVersion>1.0.2</FileVersion>
-		<Version>1.0.2</Version>
+		<FileVersion>1.0.2.1</FileVersion>
+		<Version>1.0.2.1</Version>
 		<SignAssembly>True</SignAssembly>
 		<AssemblyOriginatorKeyFile>Ridavei.snk</AssemblyOriginatorKeyFile>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+	</PropertyGroup>
+	
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0|AnyCPU'">
 		<WarningLevel>5</WarningLevel>
 	</PropertyGroup>
@@ -25,5 +34,9 @@
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0|AnyCPU'">
 		<WarningLevel>5</WarningLevel>
 	</PropertyGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
+	</ItemGroup>
 
 </Project>
