@@ -33,14 +33,13 @@ namespace Ridavei.FileCryption
         /// <returns>Builder</returns>
         public FileEncryptionBuilder AddEncryptionMethod(ContentType contentType, Func<Stream, string, Stream> func)
         {
-            AddCryptionMethod(contentType, func);
-            return this;
+            return AddCryptionMethod(contentType, func);
         }
 
         /// <summary>
-        /// File encryption method that returns <see cref="Stream"/>.
+        /// File encryption method that returns an encrypted <see cref="Stream"/>.
         /// </summary>
-        /// <param name="fileInfoForLoaderMethod"><see cref="Object"/> that contains basic information used by the loader method.</param>
+        /// <param name="fileInfoForLoaderMethod"><see cref="Object"/> that contains file information used by the loader method.</param>
         /// <param name="contentType">Represents the MIME Content-Type header.</param>
         /// <param name="password">Password used for encryption.</param>
         /// <returns><see cref="Stream"/> of encrypted file.</returns>

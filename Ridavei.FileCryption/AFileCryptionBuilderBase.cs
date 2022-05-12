@@ -47,20 +47,20 @@ namespace Ridavei.FileCryption
         /// <param name="contentType">Represents the MIME Content-Type header.</param>
         /// <param name="func"></param>
         /// <returns>Builder</returns>
-        protected AFileCryptionBuilderBase<T> AddCryptionMethod(ContentType contentType, Func<Stream, string, Stream> func)
+        protected T AddCryptionMethod(ContentType contentType, Func<Stream, string, Stream> func)
         {
             if (_cryptionMethods.ContainsKey(contentType))
                 _cryptionMethods[contentType] = func;
             else
                 _cryptionMethods.Add(contentType, func);
 
-            return this;
+            return (T)this;
         }
 
         /// <summary>
-        /// File encryption/decryption method that returns <see cref="Stream"/>.
+        /// File encryption/decryption method that returns an encrypted/decrypted <see cref="Stream"/>.
         /// </summary>
-        /// <param name="fileInfoForLoaderMethod"><see cref="Object"/> that contains basic information used by the loader method.</param>
+        /// <param name="fileInfoForLoaderMethod"><see cref="Object"/> that contains file information used by the loader method.</param>
         /// <param name="contentType">Represents the MIME Content-Type header.</param>
         /// <param name="password">Password used for encryption/decryption.</param>
         /// <returns><see cref="Stream"/> of encrypted/decrypted file.</returns>

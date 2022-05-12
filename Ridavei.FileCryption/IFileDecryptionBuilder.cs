@@ -10,9 +10,9 @@ namespace Ridavei.FileCryption
     public interface IFileDecryptionBuilder
     {
         /// <summary>
-        /// File decryption method that returns <see cref="Stream"/>.
+        /// File decryption method that returns an decrypted <see cref="Stream"/>.
         /// </summary>
-        /// <param name="fileInfoForLoaderMethod"><see cref="Object"/> that contains basic information used by the loader method.</param>
+        /// <param name="fileInfoForLoaderMethod"><see cref="Object"/> that contains file information used by the loader method.</param>
         /// <param name="contentType">Represents the MIME Content-Type header.</param>
         /// <param name="password">Password used for decryption.</param>
         /// <returns><see cref="Stream"/> of decrypted file.</returns>
