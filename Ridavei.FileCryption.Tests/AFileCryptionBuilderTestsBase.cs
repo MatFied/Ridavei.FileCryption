@@ -19,11 +19,31 @@ namespace Ridavei.FileCryption.Tests
         protected string ExpectedExtensionCryptionFileValue;
 
         [Test]
-        public void SetFileLoaderMethod_NullMethod__NoException()
+        public void SetFileLoaderMethod_NullMethod__RaisesException()
         {
-            Assert.DoesNotThrow(() =>
+            Assert.Throws<ArgumentNullException>(() =>
             {
                 Builder.SetFileLoaderMethod(null);
+            });
+        }
+
+        [Test]
+        public void AddCryptionMethod_NullContentType__RaisesException()
+        {
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                Builder.SetFileLoaderMethod(TestNullFileLoadMethod);
+                AddCryptionMethod(null, TestCryptionMethod);
+            });
+        }
+
+        [Test]
+        public void AddCryptionMethod_NullCrptionMethod__RaisesException()
+        {
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                Builder.SetFileLoaderMethod(TestNullFileLoadMethod);
+                AddCryptionMethod(new ContentType(MediaTypeNames.Text.Plain), null);
             });
         }
 

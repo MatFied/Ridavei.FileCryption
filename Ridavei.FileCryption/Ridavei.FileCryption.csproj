@@ -12,8 +12,8 @@
 		<RepositoryType>git</RepositoryType>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<FileVersion>1.0.2.2</FileVersion>
-		<Version>1.0.2.2</Version>
+		<FileVersion>1.0.2.3</FileVersion>
+		<Version>1.0.2.3</Version>
 		<SignAssembly>True</SignAssembly>
 		<AssemblyOriginatorKeyFile>Ridavei.snk</AssemblyOriginatorKeyFile>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>

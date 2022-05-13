@@ -35,8 +35,12 @@ namespace Ridavei.FileCryption
         /// </summary>
         /// <param name="func"></param>
         /// <returns>Builder</returns>
+        /// <exception cref="ArgumentNullException">Exception throwed when file load method is null.</exception>
         public T SetFileLoaderMethod(Func<object, Stream> func)
         {
+            if (func == null)
+                throw new ArgumentNullException(nameof(func), "File loader method is null.");
+
             _fileLoadMethod = func;
             return (T)this;
         }
@@ -47,8 +51,14 @@ namespace Ridavei.FileCryption
         /// <param name="contentType">Represents the MIME Content-Type header.</param>
         /// <param name="func"></param>
         /// <returns>Builder</returns>
+        /// <exception cref="ArgumentNullException">Exception throwed when file cryption method or content type are null.</exception>
         protected T AddCryptionMethod(ContentType contentType, Func<Stream, string, Stream> func)
         {
+            if (contentType == null)
+                throw new ArgumentNullException(nameof(contentType), "Content type is null.");
+            if (func == null)
+                throw new ArgumentNullException(nameof(func), "File cryption method is null.");
+
             if (_cryptionMethods.ContainsKey(contentType))
                 _cryptionMethods[contentType] = func;
             else
